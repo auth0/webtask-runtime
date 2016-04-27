@@ -1,0 +1,25 @@
+{
+  "name": "webtask-runtime",
+  "version": "1.0.0",
+  "description": "Runtime components of the webtask.io sandbox",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "babel": "^5.8.38",
+    "async": "^2.0.0-rc.3",
+    "detective": "^4.3.1",
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "code": "^2.2.0",
+    "lab": "^10.3.2"
+  },
+  "scripts": {
+    "test": "lab -v"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
