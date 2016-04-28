@@ -51,4 +51,37 @@ lab.experiment('Simulation of mock requests', () => {
             done();
         });
     });
+    
+    lab.test('will correctly simulate a POST request with a JSON body (parseBody: false)', done => {
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'echo_server.js'), 'utf8');
+        const options = {
+            logger,
+            url: '/simulation',
+            method: 'POST',
+            query: { hello: 'world' },
+            payload: { goodbye: 'moon' },
+            secrets: { something: 'private' },
+            params: { something: 'public' },
+        };
+        
+        Runtime.simulate(code, options, (res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.payload).to.be.a.string();
+            
+            const payload = JSON.parse(res.payload);
+            
+            expect(payload.url).to.equal('/simulation?hello=world');
+            expect(payload.method).to.equal('POST');
+            expect(payload.query).to.deep.equal({ hello: 'world' });
+            expect(payload.body).to.be.undefined(); // parseBody is false
+            expect(payload.secrets).to.deep.equal({ something: 'private' });
+            expect(payload.params).to.deep.equal({ something: 'public' });
+            
+            done();
+        });
+    });
 });
+
+if (require.main === module) {
+    Lab.report([lab], { output: process.stdout, progress: 2 });
+}
