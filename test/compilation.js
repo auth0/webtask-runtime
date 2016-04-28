@@ -131,9 +131,9 @@ lab.experiment('Webtask compilation', () => {
         
         lab.test('will cause the `installModule` callback to be invoked', done => {
             const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'use_npm_bogus.js'), 'utf8');
-            const installed = [];
+            const requested = [];
             const installModule = (spec, cb) => {
-                installed.push(spec);
+                requested.push(spec);
                 
                 cb();
             };
@@ -142,7 +142,27 @@ lab.experiment('Webtask compilation', () => {
                 expect(err).to.be.an.error();
                 expect(err.message).to.be.a.string().and.contain('Cannot find module \'bogus\'');
                 expect(webtaskFunction).to.be.undefined();
-                expect(installed).to.be.an.array().and.contain('bogus');
+                expect(requested).to.be.an.array().and.contain('bogus');
+                
+                done();
+            });
+        });
+        
+        lab.test('will not invoke the `installModule` callback if the directive is modified', done => {
+            const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'use_npm_bogus.js'), 'utf8')
+                .replace('"use npm"', '"use astrology"');
+            const requested = [];
+            const installModule = (spec, cb) => {
+                requested.push(spec);
+                
+                cb();
+            };
+            
+            Runtime.compile(code, { installModule, logger }, (err, webtaskFunction) => {
+                expect(err).to.be.an.error();
+                expect(err.message).to.be.a.string().and.contain('Cannot find module \'bogus\'');
+                expect(webtaskFunction).to.be.undefined();
+                expect(requested).to.be.an.array().and.be.empty();
                 
                 done();
             });
