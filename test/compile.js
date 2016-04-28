@@ -13,8 +13,8 @@ const expect = Code.expect;
 
 lab.experiment('Webtask compilation', () => {
     
-    lab.test('will compile a 1-argument exported webtask', done => {
-        const code = Fs.readFileSync(Path.join(__dirname, 'fixtures', 'exports_hello_world_1.js'), 'utf8');
+    lab.test('will compile an exported webtask (1-argument)', done => {
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'exports_hello_world_1.js'), 'utf8');
         
         Runtime.compile(code, (err, webtaskFunction) => {
             expect(err).to.be.null();
@@ -25,8 +25,8 @@ lab.experiment('Webtask compilation', () => {
         });
     });
     
-    lab.test('will compile a 2-argument exported webtask', done => {
-        const code = Fs.readFileSync(Path.join(__dirname, 'fixtures', 'exports_hello_world_2.js'), 'utf8');
+    lab.test('will compile an exported webtask (2-argument)', done => {
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'exports_hello_world_2.js'), 'utf8');
         
         Runtime.compile(code, (err, webtaskFunction) => {
             expect(err).to.be.null();
@@ -37,8 +37,8 @@ lab.experiment('Webtask compilation', () => {
         });
     });
     
-    lab.test('will compile a 3-argument exported webtask', done => {
-        const code = Fs.readFileSync(Path.join(__dirname, 'fixtures', 'exports_hello_world_3.js'), 'utf8');
+    lab.test('will compile an exported webtask (3-argument)', done => {
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'exports_hello_world_3.js'), 'utf8');
         
         Runtime.compile(code, (err, webtaskFunction) => {
             expect(err).to.be.null();
@@ -49,8 +49,8 @@ lab.experiment('Webtask compilation', () => {
         });
     });
     
-    lab.test('will fail to compile a 4-argument exported webtask', done => {
-        const code = Fs.readFileSync(Path.join(__dirname, 'fixtures', 'exports_hello_world_4.js'), 'utf8');
+    lab.test('will fail to compile an exported webtask (4-argument)', done => {
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'exports_hello_world_4.js'), 'utf8');
         
         Runtime.compile(code, (err, webtaskFunction) => {
             expect(err).to.be.an.error();
@@ -61,8 +61,8 @@ lab.experiment('Webtask compilation', () => {
         });
     });
     
-    lab.test('will compile a 1-argument returned webtask', done => {
-        const code = Fs.readFileSync(Path.join(__dirname, 'fixtures', 'returns_hello_world_1.js'), 'utf8');
+    lab.test('will compile a returned webtask function (1-argument)', done => {
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'returns_hello_world_1.js'), 'utf8');
         
         Runtime.compile(code, (err, webtaskFunction) => {
             expect(err).to.be.null();
@@ -73,8 +73,8 @@ lab.experiment('Webtask compilation', () => {
         });
     });
     
-    lab.test('will compile a 2-argument returned webtask', done => {
-        const code = Fs.readFileSync(Path.join(__dirname, 'fixtures', 'returns_hello_world_2.js'), 'utf8');
+    lab.test('will compile a returned webtask function (2-argument)', done => {
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'returns_hello_world_2.js'), 'utf8');
         
         Runtime.compile(code, (err, webtaskFunction) => {
             expect(err).to.be.null();
@@ -85,8 +85,8 @@ lab.experiment('Webtask compilation', () => {
         });
     });
     
-    lab.test('will compile a 3-argument returned webtask', done => {
-        const code = Fs.readFileSync(Path.join(__dirname, 'fixtures', 'returns_hello_world_3.js'), 'utf8');
+    lab.test('will compile a returned webtask function (3-argument)', done => {
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'returns_hello_world_3.js'), 'utf8');
         
         Runtime.compile(code, (err, webtaskFunction) => {
             expect(err).to.be.null();
@@ -98,7 +98,7 @@ lab.experiment('Webtask compilation', () => {
     });
     
     lab.test('will fail to compile a webtask exporting junk', done => {
-        const code = Fs.readFileSync(Path.join(__dirname, 'fixtures', 'exports_junk.js'), 'utf8');
+        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'exports_junk.js'), 'utf8');
         
         Runtime.compile(code, (err, webtaskFunction) => {
             expect(err).to.be.an.error();
