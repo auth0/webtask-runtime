@@ -32,7 +32,7 @@ lab.experiment('Storage APIs', () => {
     lab.test('will start with undefined value and undefined etag', { timeout: 0 }, done => {
         const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'storage_set_query.js'), 'utf8');
         
-        server = Runtime.createServer(code, { logger, storage });
+        server = Runtime.createServer(storageSetQuery, { logger, storage });
         
         server.listen(3001);
         
@@ -62,6 +62,29 @@ lab.experiment('Storage APIs', () => {
                 server.close(done);
             });
         });
+        
+        function storageSetQuery(ctx, cb) {
+            const initialEtag = ctx.storage.etag;
+            
+            ctx.storage.get((err, data) => {
+                if (err) return cb(err);
+                
+                const afterReadEtag = ctx.storage.etag;
+                
+                ctx.storage.set(ctx.query, err => {
+                    if (err) return cb(err);
+                    
+                    cb(null, {
+                        data,
+                        etag: ctx.storage.etag,
+                        initialEtag,
+                        afterReadEtag,
+                    });
+                });
+                
+                // Set storage after the request is sent
+            });
+        }
     });
 });
 
