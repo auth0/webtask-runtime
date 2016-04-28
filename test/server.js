@@ -23,7 +23,7 @@ lab.experiment('Local webtask server', () => {
     
     lab.test('will run an exported webtask (1-argument)', done => {
         const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'exports_hello_world_1.js'), 'utf8');
-        const server = Runtime.createServer(code, logger);
+        const server = Runtime.createServer(code, { logger });
         
         server.listen(3001);
         
@@ -38,7 +38,7 @@ lab.experiment('Local webtask server', () => {
     
     lab.test('will run an exported webtask (2-argument)', done => {
         const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'exports_hello_world_2.js'), 'utf8');
-        const server = Runtime.createServer(code, logger);
+        const server = Runtime.createServer(code, { logger });
         
         server.listen(3001);
         
@@ -53,7 +53,7 @@ lab.experiment('Local webtask server', () => {
     
     lab.test('will run an exported webtask (3-argument)', done => {
         const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'exports_hello_world_3.js'), 'utf8');
-        const server = Runtime.createServer(code, logger);
+        const server = Runtime.createServer(code, { logger });
         
         server.listen(3001);
         
