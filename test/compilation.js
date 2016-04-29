@@ -132,13 +132,13 @@ lab.experiment('Webtask compilation', () => {
         lab.test('will cause the `installModule` callback to be invoked', done => {
             const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'use_npm_bogus.js'), 'utf8');
             const requested = [];
-            const installModule = (spec, cb) => {
-                requested.push(spec);
+            const installModules = (specs, cb) => {
+                requested.push.apply(requested, specs);
                 
                 cb();
             };
             
-            Runtime.compile(code, { installModule, logger }, (err, webtaskFunction) => {
+            Runtime.compile(code, { installModules, logger }, (err, webtaskFunction) => {
                 expect(err).to.be.an.error();
                 expect(err.message).to.be.a.string().and.contain('Cannot find module \'bogus\'');
                 expect(webtaskFunction).to.be.undefined();
