@@ -20,7 +20,7 @@ lab.experiment('Storage APIs', () => {
         warn: () => null,
         error: () => null,
     };
-    const storage = Runtime.createStorage();
+    // const storage = Runtime.createStorage();
     let server;
     
     lab.afterEach(done => {
@@ -32,7 +32,7 @@ lab.experiment('Storage APIs', () => {
     lab.test('will start with undefined value and undefined etag', { timeout: 0 }, done => {
         const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'storage_set_query.js'), 'utf8');
         
-        server = Runtime.createServer(storageSetQuery, { logger, storage });
+        server = Runtime.createServer(storageSetQuery, { logger });
         
         server.listen(3001);
         
