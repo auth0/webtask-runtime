@@ -8,10 +8,12 @@ const Path = require('path');
 const Runtime = require('../');
 
 const lab = exports.lab = Lab.script();
+const describe = lab.describe;
+const it = lab.it;
 const expect = Code.expect;
 
 
-lab.experiment('Sandbox programming model', () => {
+describe('Sandbox programming model', () => {
     
     const logger = {
         info: () => null,
@@ -19,7 +21,7 @@ lab.experiment('Sandbox programming model', () => {
         error: () => null,
     };
     
-    lab.test('will correctly respond to webtask_pb=1 in the query parameters', done => {
+    it('will correctly respond to webtask_pb=1 in the query parameters', done => {
         const code = (ctx, cb) => cb(null, ctx.body);
         const payload = { hello: 'world' };
         
@@ -35,7 +37,7 @@ lab.experiment('Sandbox programming model', () => {
         });
     });
     
-    lab.test('fails with malformed javascript', done => {
+    it('fails with malformed javascript', done => {
         const code = 'malformed javascript';
         
         Runtime.simulate(code, { logger }, (res) => {
@@ -46,13 +48,13 @@ lab.experiment('Sandbox programming model', () => {
         });
     });
     
-    lab.test('fails with requests that are too large', done => {
+    it('fails with requests that are too large', done => {
         const code = (ctx, cb) => cb(null, ctx.raw_body);
         const maxBodySize = 100;
-        const payload = '0'.repeat(500);
+        const payload = '0'.repeat(500 * 1024);
         
         Runtime.simulate(code, { logger, maxBodySize, parseBody: true, payload, method: 'POST' }, (res) => {
-            expect(res.statusCode).to.equal(413);
+            expect(res.statusCode).to.equal(400);
             expect(res.payload).to.be.a.string().and.contain('Script exceeds the size limit');
             
             done();
