@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "acorn": "^3.2.0",
-    "async": "^2.0.0-rc.3",
+    "async": "^2.0.0-rc.5",
     "babel": "^5.8.38",
     "jsonwebtoken": "^6.1.0",
     "lodash": "^3.10.1",
