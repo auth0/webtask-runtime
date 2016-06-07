@@ -167,6 +167,25 @@ lab.experiment('Webtask compilation', () => {
                 done();
             });
         });
+        
+        lab.test('will rewrite the source code for version-specific requires', done => {
+            const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'use_npm_with_version.js'), 'utf8');
+            const requested = [];
+            const installModules = (specs, cb) => {
+                requested.push.apply(requested, specs);
+                
+                cb();
+            };
+            
+            Runtime.compile(code, { installModules, logger }, (err, webtaskFunction) => {
+                expect(err).to.be.an.error();
+                expect(err.message).to.be.a.string().and.contain('Cannot find module \'bogus\'');
+                expect(webtaskFunction).to.be.undefined();
+                expect(requested).to.be.an.array().and.contain('bogus@1.0.0');
+                
+                done();
+            });
+        });
     });
 });
 

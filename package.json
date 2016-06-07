@@ -7,9 +7,9 @@
     "test": "test"
   },
   "dependencies": {
+    "acorn": "^3.2.0",
     "async": "^2.0.0-rc.3",
     "babel": "^5.8.38",
-    "detective": "^4.3.1",
     "jsonwebtoken": "^6.1.0",
     "lodash": "^3.10.1",
     "raw-body": "^2.1.6",
