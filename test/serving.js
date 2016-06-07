@@ -35,11 +35,11 @@ lab.experiment('Local webtask server', () => {
         server.listen(3001);
         
         Request.get('http://localhost:3001', { json: false }, (err, res, body) => {
+            server.close(done);
+            
             expect(err).to.be.null();
             expect(res.statusCode).to.equal(200);
             expect(body).to.equal('"hello world"');
-            
-            server.close(done);
         });
     });
     
@@ -50,11 +50,11 @@ lab.experiment('Local webtask server', () => {
         server.listen(3001);
         
         Request.get('http://localhost:3001', { json: false }, (err, res, body) => {
+            server.close(done);
+            
             expect(err).to.be.null();
             expect(res.statusCode).to.equal(200);
             expect(body).to.equal('"hello world"');
-            
-            server.close(done);
         });
     });
     
@@ -65,11 +65,29 @@ lab.experiment('Local webtask server', () => {
         server.listen(3001);
         
         Request.get('http://localhost:3001', { json: false }, (err, res, body) => {
+            server.close(done);
+            
             expect(err).to.be.null();
             expect(res.statusCode).to.equal(200);
             expect(body).to.equal('"hello world"');
-            
+        });
+    });
+    
+    lab.test('will only run a webtask once per request', done => {
+        let count = 0;
+        
+        const webtaskFn = (cb) => { count++; console.log('run'); cb(null, count) };
+        server = Runtime.createServer(webtaskFn, { logger });
+        
+        server.listen(3001);
+        
+        Request.get('http://localhost:3001', { json: false }, (err, res, body) => {
             server.close(done);
+            
+            expect(err).to.be.null();
+            expect(res.statusCode).to.equal(200);
+            expect(body).to.equal("1");
+            expect(count).to.equal(1);
         });
     });
 });
