@@ -24,8 +24,8 @@ lab.experiment('Storage APIs', () => {
 
     lab.afterEach(done => {
         Fs.writeFileSync(Path.join(__dirname, '../fixtures/data_clicks.json'), JSON.stringify({
-          "foo": "bar",
-          "totalClicks": 12345
+            "foo": "bar",
+            "totalClicks": 12345
         }, null, 2), 'utf8');
 
         server && server.listening
