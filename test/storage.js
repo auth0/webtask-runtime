@@ -3,7 +3,6 @@
 
 const Code = require('code');
 const Fs = require('fs');
-const Http = require('http');
 const Lab = require('lab');
 const Path = require('path');
 const Request = require('request');
@@ -35,8 +34,6 @@ lab.experiment('Storage APIs', () => {
     });
 
     lab.test('will start with undefined value and undefined etag', { timeout: 0 }, done => {
-        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'storage_set_query.js'), 'utf8');
-
         server = Runtime.createServer(storageSetQuery, { logger });
 
         server.listen(3001);
@@ -93,8 +90,6 @@ lab.experiment('Storage APIs', () => {
     });
 
     lab.test('will not throw if storageFile is not found', { timeout: 0 }, done => {
-        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'storage_set_query.js'), 'utf8');
-
         server = Runtime.createServer(storageSetQuery, { logger, storageFile: './foo/bar' });
 
         server.listen(3001);
@@ -119,8 +114,6 @@ lab.experiment('Storage APIs', () => {
     });
 
     lab.test('will not use storageFile if initialData is set', { timeout: 0 }, done => {
-        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'storage_set_query.js'), 'utf8');
-
         server = Runtime.createServer(storageGetQuery, { logger, initialStorageData: { a: 'b' }, storageFile: Path.join(__dirname, '../fixtures/data_dummy.json') });
 
         server.listen(3001);
@@ -146,8 +139,6 @@ lab.experiment('Storage APIs', () => {
     });
 
     lab.test('will use the storageFile to load the initial data', { timeout: 0 }, done => {
-        const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'storage_set_query.js'), 'utf8');
-
         server = Runtime.createServer(storageGetQuery, { logger, storageFile: Path.join(__dirname, '../fixtures/data_clicks.json') });
 
         server.listen(3001);
