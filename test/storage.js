@@ -201,7 +201,7 @@ lab.experiment('Storage APIs', () => {
                   });
                 }
 
-                const update = { foo: data.foo, totalClicks: parseInt(ctx.query.totalClicks) };
+                const update = { foo: data.foo, totalClicks: parseInt(ctx.query.totalClicks, 10) };
                 ctx.storage.set(update, err => {
                     if (err) return cb(err);
 
