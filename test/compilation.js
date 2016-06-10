@@ -148,6 +148,25 @@ lab.experiment('Webtask compilation', () => {
             });
         });
         
+        lab.test('will cause the `installModule` callback to be invoked for nested expressions', done => {
+            const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'use_npm_expression.js'), 'utf8');
+            const requested = [];
+            const installModules = (specs, cb) => {
+                requested.push.apply(requested, specs);
+                
+                cb();
+            };
+            
+            Runtime.compile(code, { installModules, logger }, (err, webtaskFunction) => {
+                expect(err).to.be.an.error();
+                expect(err.message).to.be.a.string().and.contain('Cannot find module \'expression\'');
+                expect(webtaskFunction).to.be.undefined();
+                expect(requested).to.be.an.array().and.contain('expression');
+                
+                done();
+            });
+        });
+        
         lab.test('will not invoke the `installModule` callback if the directive is modified', done => {
             const code = Fs.readFileSync(Path.join(__dirname, '..', 'fixtures', 'use_npm_bogus.js'), 'utf8')
                 .replace('"use npm"', '"use astrology"');
