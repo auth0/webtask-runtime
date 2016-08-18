@@ -12,6 +12,7 @@
     "babel": "^5.8.38",
     "jsonwebtoken": "^6.1.0",
     "lodash": "^3.10.1",
+    "magic-string": "^0.16.0",
     "raw-body": "^2.1.6",
     "shot": "^3.0.1"
   },
