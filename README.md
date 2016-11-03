@@ -4,12 +4,21 @@ A series of components that replicate the behaviour of the runtime component of 
 
 ## Example
 
+**Given a sample webtask:**
+
+```js
+function webtask(ctx, cb) {
+    return cb(null, {
+        secret: ctx.secrets.hello,
+    });
+}
+```
+
 **Sample of simulating a request to a webtask function:**
 
 ```js
 const Assert = require('assert');
 const Runtime = require('webtask-runtime');
-const Webtask = require('./webtask');
 
 Runtime.simulate(webtask, { secrets: { hello: 'world' }}, function (err, res) {
     Assert.ok(res.statusCode === 200);
@@ -22,7 +31,6 @@ Runtime.simulate(webtask, { secrets: { hello: 'world' }}, function (err, res) {
 ```js
 const Assert = require('assert');
 const Runtime = require('webtask-runtime');
-const Webtask = require('./webtask');
 
 const server = Runtime.createServer(webtask, { secrets: { hello: 'world' }});
 
