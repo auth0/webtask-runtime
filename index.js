@@ -25,4 +25,7 @@ module.exports = {
     runWebtaskFunction: Runner.run,
     simulate: Simulator.simulate,
     installEndListener: Request.installEndListener,
+    PARSE_NEVER: 0,
+    PARSE_ALWAYS: 1,
+    PARSE_ON_ARITY: 2,
 };
