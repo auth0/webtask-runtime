@@ -20,7 +20,7 @@ function webtask(ctx, cb) {
 const Assert = require('assert');
 const Runtime = require('webtask-runtime');
 
-Runtime.simulate(webtask, { secrets: { hello: 'world' }}, function (err, res) {
+Runtime.simulate(webtask, { secrets: { hello: 'world' }}, function (res) {
     Assert.ok(res.statusCode === 200);
     Assert.ok(typeof res.payload === 'string');
 });
