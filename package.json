@@ -17,12 +17,12 @@
     "shot": "^3.0.1"
   },
   "devDependencies": {
-    "code": "^2.2.0",
-    "lab": "^10.3.2",
+    "code": "^4.0.0",
+    "lab": "^11.2.1",
     "request": "^2.72.0"
   },
   "scripts": {
-    "test": "lab -v"
+    "test": "lab -cvL -t 0%"
   },
   "keywords": [],
   "author": "",
