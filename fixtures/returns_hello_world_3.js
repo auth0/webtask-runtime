@@ -3,4 +3,4 @@ return function (ctx, req, res) {
         'content-type': 'application/json',
     });
     res.end(JSON.stringify('hello world', null, 2));
-}
+};

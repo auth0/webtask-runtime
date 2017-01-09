@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 module.exports = function (ctx, req, res, bogus) {
     res.writeHead(200, {
         'content-type': 'application/json',

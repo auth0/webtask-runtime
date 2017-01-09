@@ -72,10 +72,10 @@ lab.experiment('Simulation of mock requests', () => {
             
             expect(payload.url).to.equal('/simulation?hello=world');
             expect(payload.method).to.equal('POST');
-            expect(payload.query).to.deep.equal({ hello: 'world' });
+            expect(payload.query).to.equal({ hello: 'world' });
             expect(payload.body).to.be.undefined(); // parseBody is false
-            expect(payload.secrets).to.deep.equal({ something: 'private' });
-            expect(payload.params).to.deep.equal({ something: 'public' });
+            expect(payload.secrets).to.equal({ something: 'private' });
+            expect(payload.params).to.equal({ something: 'public' });
             
             done();
         });

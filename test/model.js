@@ -2,9 +2,7 @@
 
 
 const Code = require('code');
-const Fs = require('fs');
 const Lab = require('lab');
-const Path = require('path');
 const Runtime = require('../');
 
 const lab = exports.lab = Lab.script();
@@ -31,7 +29,7 @@ describe('Sandbox programming model', () => {
             
             const json = JSON.parse(res.payload);
             
-            expect(json).to.deep.equal({ hello: 'world' });
+            expect(json).to.equal({ hello: 'world' });
             
             done();
         });

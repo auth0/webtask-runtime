@@ -28,8 +28,8 @@ lab.experiment('Storage APIs', () => {
             "totalClicks": 12345
         }, null, 2), 'utf8');
 
-        server && server.listening
-            ?   server.close(done)
+        server
+            ?   server.close(() => done())
             :   done();
     });
 
@@ -59,9 +59,9 @@ lab.experiment('Storage APIs', () => {
                 expect(body.afterReadEtag).to.be.a.string().and.to.equal(afterWriteEtag);
                 expect(body.etag).to.not.equal(body.initialEtag);
 
-                expect(body.data).to.deep.equal({ store: 'this' });
+                expect(body.data).to.equal({ store: 'this' });
 
-                server.close(done);
+                done();
             });
         });
 
@@ -99,7 +99,7 @@ lab.experiment('Storage APIs', () => {
             expect(res.statusCode).to.equal(200);
             expect(body).to.be.an.object();
             expect(body.data).to.be.undefined();
-            server.close(done);
+            done();
         });
 
         function storageSetQuery(ctx, cb) {
@@ -107,7 +107,7 @@ lab.experiment('Storage APIs', () => {
                 if (err) return cb(err);
 
                 cb(null, {
-                  data
+                    data
                 });
             });
         }
@@ -124,7 +124,7 @@ lab.experiment('Storage APIs', () => {
             expect(body).to.be.an.object();
             expect(body.data).to.be.an.object();
             expect(body.data.a).to.equal("b");
-            server.close(done);
+            done();
         });
 
         function storageGetQuery(ctx, cb) {
@@ -132,7 +132,7 @@ lab.experiment('Storage APIs', () => {
                 if (err) return cb(err);
 
                 cb(null, {
-                  data
+                    data
                 });
             });
         }
@@ -150,7 +150,7 @@ lab.experiment('Storage APIs', () => {
             expect(body.data).to.be.an.object();
             expect(body.data.foo).to.equal("bar");
             expect(body.data.totalClicks).to.equal(12345);
-            server.close(done);
+            done();
         });
 
         function storageGetQuery(ctx, cb) {
@@ -158,7 +158,7 @@ lab.experiment('Storage APIs', () => {
                 if (err) return cb(err);
 
                 cb(null, {
-                  data
+                    data
                 });
             });
         }
@@ -187,7 +187,7 @@ lab.experiment('Storage APIs', () => {
                 const dataFile = JSON.parse(Fs.readFileSync(Path.join(__dirname, '../fixtures/data_clicks.json'), 'utf8'));
                 expect(dataFile.totalClicks).to.equal(20000);
 
-                server.close(done);
+                done();
             });
         });
 
@@ -196,9 +196,9 @@ lab.experiment('Storage APIs', () => {
                 if (err) return cb(err);
 
                 if (!ctx.query || !ctx.query.totalClicks) {
-                  return cb(null, {
-                    data
-                  });
+                    return cb(null, {
+                        data
+                    });
                 }
 
                 const update = { foo: data.foo, totalClicks: parseInt(ctx.query.totalClicks, 10) };
