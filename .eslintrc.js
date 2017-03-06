@@ -4,16 +4,13 @@ module.exports = {
     },
     "env": {
         "node": true,
-        "es6": true,
     },
-    // "extends": "auth0-base",
+    "extends": ["eslint:recommended"],
     "rules": {
        "indent": ["warn", 4],
        "global-require": 0,
        "camelcase": 0,
        "curly": 0,
        "no-undef": ["error"],
-       "no-unused-vars": ["warn"],
-       "semi": ["warn", "always"],
     }
-};
+}
