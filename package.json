@@ -1,6 +1,6 @@
 {
   "name": "webtask-runtime",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Runtime components of the webtask.io sandbox",
   "main": "index.js",
   "directories": {
