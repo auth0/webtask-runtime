@@ -74,6 +74,22 @@ describe('Sandbox programming model', () => {
             done();
         });
     });
+
+    it('exposes meta using the module.webtask api', done => {
+        const code = `
+            const meta = module.webtask.meta;
+
+            module.exports = (cb) => cb(null, { meta });
+        `;
+        const meta = { key: 'value' };
+
+        Runtime.simulate(code, { logger, meta, parseBody: true }, (res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.payload).to.equal(JSON.stringify({ meta }));
+
+            done();
+        });
+    });
 });
 
 if (require.main === module) {

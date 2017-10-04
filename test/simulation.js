@@ -62,6 +62,7 @@ lab.experiment('Simulation of mock requests', () => {
             payload: { goodbye: 'moon' },
             secrets: { something: 'private' },
             params: { something: 'public' },
+            meta: { something: 'meta' }
         };
         
         Runtime.simulate(code, options, (res) => {
@@ -76,6 +77,7 @@ lab.experiment('Simulation of mock requests', () => {
             expect(payload.body).to.be.undefined(); // parseBody is false
             expect(payload.secrets).to.equal({ something: 'private' });
             expect(payload.params).to.equal({ something: 'public' });
+            expect(payload.meta).to.equal({ something: 'meta' });
             
             done();
         });
