@@ -75,11 +75,13 @@ lab.experiment('Local webtask server', () => {
     lab.test('supports the module.webtask api when serving webtasks', done => {
         const code = `
             const secrets = module.webtask.secrets;
+            const meta = module.webtask.meta;
 
-            module.exports = (cb) => cb(null, { secrets });
+            module.exports = (cb) => cb(null, { secrets, meta });
         `;
         const secrets = { key: 'value' };
-        server = Runtime.createServer(code, { logger, secrets });
+        const meta = { key: 'value' };
+        server = Runtime.createServer(code, { logger, secrets, meta });
 
         server.listen(3001);
 
@@ -88,14 +90,14 @@ lab.experiment('Local webtask server', () => {
 
             expect(err).to.be.null();
             expect(res.statusCode).to.equal(200);
-            expect(body).to.equal(JSON.stringify({ secrets }));
+            expect(body).to.equal(JSON.stringify({ secrets, meta }));
         });
     });
 
     lab.test('will only run a webtask once per request', done => {
         let count = 0;
 
-        const webtaskFn = (cb) => { count++; console.log('run'); cb(null, count); };
+        const webtaskFn = (cb) => { count++; cb(null, count); };
         server = Runtime.createServer(webtaskFn, { logger });
 
         server.listen(3001);

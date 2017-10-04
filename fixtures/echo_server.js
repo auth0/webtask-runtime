@@ -6,6 +6,7 @@ module.exports = function (ctx, req, res) {
         body: req.body,
         query: req.query,
         secrets: ctx.secrets,
+        meta: ctx.meta,
         params: ctx.params,
     }, null, 2));
 };
