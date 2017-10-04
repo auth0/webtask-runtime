@@ -97,7 +97,7 @@ lab.experiment('Local webtask server', () => {
     lab.test('will only run a webtask once per request', done => {
         let count = 0;
 
-        const webtaskFn = (cb) => { count++; console.log('run'); cb(null, count); };
+        const webtaskFn = (cb) => { count++; cb(null, count); };
         server = Runtime.createServer(webtaskFn, { logger });
 
         server.listen(3001);
