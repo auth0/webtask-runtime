@@ -7,22 +7,22 @@
     "test": "test"
   },
   "dependencies": {
-    "acorn": "^3.2.0",
     "async": "^2.0.0-rc.5",
     "babel-core": "6.26.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "jsonwebtoken": "^6.1.0",
-    "lodash": "^3.10.1",
-    "magic-string": "^0.16.0",
-    "raw-body": "^2.1.6",
-    "shot": "^3.0.1"
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.10",
+    "magic-string": "^0.25.0",
+    "shot": "^4.0.5"
   },
   "devDependencies": {
-    "code": "^4.0.0",
-    "eslint": "^4.8.0",
-    "lab": "^11.2.1",
-    "request": "^2.72.0"
+    "acorn": "^5.6.2",
+    "babel": "^6.23.0",
+    "code": "^5.2.0",
+    "eslint": "^4.19.1",
+    "lab": "^15.5.0",
+    "request": "^2.87.0"
   },
   "scripts": {
     "test": "lab -cvL -t 0%"
