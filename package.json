@@ -1,6 +1,6 @@
 {
   "name": "webtask-runtime",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Runtime components of the webtask.io sandbox",
   "main": "index.js",
   "directories": {
@@ -9,7 +9,8 @@
   "dependencies": {
     "acorn": "^3.2.0",
     "async": "^2.0.0-rc.5",
-    "babel": "^5.8.38",
+    "babel-core": "6.26.3",
+    "babel-preset-env": "^1.7.0",
     "jsonwebtoken": "^6.1.0",
     "lodash": "^3.10.1",
     "magic-string": "^0.16.0",
