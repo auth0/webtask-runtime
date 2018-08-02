@@ -83,8 +83,6 @@ lab.experiment('Storage APIs', () => {
                         afterReadEtag,
                     });
                 });
-
-                // Set storage after the request is sent
             });
         }
     });
